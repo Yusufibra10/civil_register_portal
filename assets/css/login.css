@@ -1,0 +1,134 @@
+/*
+ * Login page only — linked exclusively from layouts/login.php. Every
+ * selector is scoped under .login-page so nothing here can affect any
+ * other screen in the app.
+ *
+ * Deliberately its own fixed blue palette, not the app's configurable
+ * --brand-navy theme token (Settings -> Theme Color): the login screen
+ * is the public "front door" and the spec calls for it to always read
+ * as blue, regardless of whatever accent an Admin has picked for the
+ * authenticated app's sidebar/avatars elsewhere.
+ */
+.login-page {
+    min-height: 100vh;
+    --login-blue: #123a6b;
+    --login-blue-dark: #0a2647;
+}
+
+/* ---------------------------------------------------------------------
+ * Left branding panel — hidden below md (tablets and up show it, per
+ * spec; phones don't). A decorative building-columns glyph sits behind
+ * the text at low opacity instead of a raster illustration, since no
+ * image asset/CDN is available for one under this app's CSP.
+ * --------------------------------------------------------------------- */
+.login-branding {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--login-blue) 0%, var(--login-blue-dark) 100%);
+    color: #fff;
+    padding: 3rem 3rem 2.5rem;
+}
+
+.login-branding::before {
+    content: "\f19c"; /* fa-building-columns */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: -4rem;
+    bottom: -3rem;
+    font-size: 26rem;
+    line-height: 1;
+    color: #fff;
+    opacity: 0.06;
+    pointer-events: none;
+}
+
+.login-branding__logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+}
+
+.login-branding__title {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 2rem;
+    text-wrap: balance;
+}
+
+.login-branding__subtitle {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--brand-gold, #c79a3f);
+    font-weight: 600;
+}
+
+.login-branding__description {
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 32ch;
+    font-size: 0.95rem;
+}
+
+.login-branding__footer {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .login-branding { padding: 2rem 2rem 1.75rem; }
+    .login-branding__title { font-size: 1.5rem; }
+    .login-branding::before { font-size: 18rem; }
+}
+
+/* ---------------------------------------------------------------------
+ * Right side — form card
+ * --------------------------------------------------------------------- */
+.login-form-side {
+    background: #f4f6f9;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 1.5rem 3rem rgba(20, 40, 75, 0.12);
+}
+
+.login-card .form-control {
+    border-radius: 0.6rem;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+}
+
+.login-card .form-control:focus {
+    border-color: var(--login-blue);
+    box-shadow: 0 0 0 0.2rem rgba(20, 40, 75, 0.15);
+}
+
+.login-card .btn-primary {
+    border-radius: 0.6rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.login-card .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(20, 40, 75, 0.2);
+}
+
+.login-password-toggle {
+    border-radius: 0 0.6rem 0.6rem 0 !important;
+    background: #fff;
+}
+
+.login-mobile-brand {
+    color: var(--login-blue);
+}
