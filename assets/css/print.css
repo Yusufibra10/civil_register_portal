@@ -1,0 +1,262 @@
+/*
+ * Print layout (layouts/print.php). Screen styling makes the sheet look
+ * like a physical document even before printing — a "print preview" by
+ * construction, not a separate mode. @media print then strips away
+ * everything that only makes sense on screen.
+ */
+
+.print-body {
+    background: #e9ebf0;
+}
+
+.print-sheet {
+    background: #fff;
+    max-width: 800px;
+    margin: 24px auto;
+    padding: 40px;
+    box-shadow: 0 4px 24px rgba(20, 40, 75, 0.12);
+    border-radius: 4px;
+}
+
+.certificate-border {
+    border: 3px double var(--brand-navy, #14284b);
+    padding: 32px;
+}
+
+.certificate-seal {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--brand-navy, #14284b);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------------
+ * National ID print card (national_id/print.php only — .certificate-*
+ * above is birth/print.php's separate namespace, so this can't affect
+ * certificate printing). Styled after a physical dual-language ID card:
+ * mint security-pattern background, a corner notch, an EMV-style chip,
+ * and a photo panel. The circular emblems are a generic stand-in for
+ * the government seal/coat of arms — no image asset for the real one
+ * was available to reproduce here.
+ * --------------------------------------------------------------------- */
+.nid-card {
+    position: relative;
+    width: 460px;
+    min-height: 290px;
+    overflow: hidden;
+    border-radius: 14px;
+    padding: 16px 18px 18px;
+    background:
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.35) 0 2px, transparent 2px 9px),
+        linear-gradient(135deg, #dcefe9 0%, #bfe0d3 55%, #cfe8dc 100%);
+    box-shadow: 0 6px 20px rgba(20, 40, 75, 0.18);
+    font-size: 11px;
+    color: #16352b;
+}
+
+.nid-card__notch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 46px;
+    background: rgba(10, 40, 30, 0.08);
+    clip-path: polygon(0 0, 100% 20%, 60% 50%, 100% 80%, 0 100%);
+}
+
+.nid-card__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-left: 40px;
+}
+
+.nid-card__country {
+    font-weight: 700;
+    font-size: 11.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.nid-card__country--en { text-align: right; }
+
+.nid-card__emblem {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe9a8, #c79a3f 70%);
+    color: #5c4413;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6);
+}
+
+.nid-card__subtitle {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0 10px 40px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #2d5c4c;
+}
+
+.nid-card__body {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    margin-left: 40px;
+}
+
+/* Chip and seal live in their own narrow column, pinned to the top and
+ * bottom of it respectively (justify-content: space-between) — this is
+ * the piece the first pass got wrong: it stacked chip -> fields -> seal
+ * in one column, when the reference card actually runs them as a
+ * separate column beside the text, which is also what keeps the card's
+ * proportions from growing too tall. */
+.nid-card__chipcol {
+    flex-shrink: 0;
+    width: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 0 6px;
+}
+
+.nid-card__fields {
+    flex: 1;
+    min-width: 0;
+}
+
+.nid-card__chip {
+    position: relative;
+    width: 32px;
+    height: 24px;
+    border-radius: 3px;
+    background: linear-gradient(155deg, #f3d98b, #c79a3f 60%, #a97e2d);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
+}
+
+.nid-card__chip::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 2px;
+    background:
+        linear-gradient(rgba(0,0,0,0.25) 1px, transparent 1px) 0 0/100% 33.34%,
+        linear-gradient(90deg, rgba(0,0,0,0.25) 1px, transparent 1px) 0 0/50% 100%;
+}
+
+.nid-card__field { margin-bottom: 7px; }
+
+.nid-card__label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #3d6a59;
+    margin-bottom: 1px;
+}
+
+.nid-card__value {
+    font-weight: 700;
+    font-size: 12px;
+    color: #16352b;
+}
+
+.nid-card__value--id {
+    font-size: 14px;
+    letter-spacing: 0.03em;
+}
+
+.nid-card__value--name-first {
+    font-size: 15px;
+    line-height: 1.15;
+}
+
+.nid-card__value--name-rest {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2d5c4c;
+}
+
+.nid-card__seal {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe9a8, #c79a3f 70%);
+    color: #5c4413;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6);
+}
+
+.nid-card__photo {
+    flex-shrink: 0;
+    width: 88px;
+    height: 108px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #eef3f1;
+    border: 1px solid rgba(20, 40, 75, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9fb3ab;
+    font-size: 28px;
+}
+
+.nid-card__photo img {
+    width: 100%;
+    height: 100%;
+    /* contain, not cover: shows the citizen's original uploaded photo
+     * in full (letterboxed if its aspect ratio differs from the photo
+     * box) rather than cropping part of it away to fill the box. */
+    object-fit: contain;
+}
+
+@media print {
+    .nid-card {
+        box-shadow: none;
+        border: 1px solid #c3d6cd;
+    }
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-body {
+        background: #fff;
+    }
+
+    .print-sheet {
+        box-shadow: none;
+        margin: 0;
+        max-width: none;
+        border-radius: 0;
+    }
+
+    @page {
+        margin: 12mm;
+    }
+}
