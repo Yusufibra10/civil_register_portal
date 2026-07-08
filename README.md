@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Civil Registry Portal
 
 A civil registry and ID-services E-Government system for recording citizens, issuing birth certificates and national IDs, and processing ID applications through a staffed workflow — with public pages for verifying a certificate or tracking an application by number.
@@ -96,3 +97,6 @@ Nothing else needs editing to run locally. See [DEPLOYMENT.md](DEPLOYMENT.md) fo
 | "Your session expired due to inactivity" | Idle timeout is 30 minutes (`SESSION_TIMEOUT_SECONDS` in `config/config.php`) — log in again. |
 
 For deployment, admin usage, and database setup, see the other docs in this repository: [INSTALLATION.md](INSTALLATION.md), [DEPLOYMENT.md](DEPLOYMENT.md), [ADMIN_GUIDE.md](ADMIN_GUIDE.md), [USER_GUIDE.md](USER_GUIDE.md), [DATABASE_SETUP.md](DATABASE_SETUP.md).
+=======
+# civil_register_portal
+>>>>>>> e29379ee26f9dc9972b0795ba0bdeaadf0e006cb
