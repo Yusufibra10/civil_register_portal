@@ -1,0 +1,16 @@
+<?php
+/**
+ * Production/staging database credentials.
+ *
+ * Copy this file to config/database.local.php and fill in real values —
+ * that filename is gitignored and is also blocked from web access by
+ * config/.htaccess, same as every other file in this directory.
+ *
+ * Never commit the copied file. Never reuse the local XAMPP root/blank
+ * password combination outside of local development.
+ */
+
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'civil_registry_portal');
+define('DB_USER', 'civil_registry_app');
+define('DB_PASS', 'CHANGE-ME-TO-A-STRONG-PASSWORD');
