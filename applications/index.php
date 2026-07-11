@@ -181,7 +181,7 @@ ob_start();
                 <input type="hidden" name="id" value="">
                 <input type="hidden" name="target_status_code" id="statusModalCode" value="">
                 <div class="modal-header">
-                    <h2 class="modal-title h5">Move to <span id="statusModalLabel"></span></h2>
+                    <h2 class="modal-title h5">Move too <span id="statusModalLabel"></span></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
